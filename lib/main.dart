@@ -15,7 +15,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Currency Exchange Rates',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
+        ),
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
+        ),
       ),
       home: const HomePage(),
     );
@@ -58,9 +69,16 @@ class _HomePageState extends State<HomePage> {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
-            child: Text('Select Currency'),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+            child: Text(
+              'Select Currency',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+            ),
           ),
           ..._currencies!.entries.map(
             (entry) => ListTile(
